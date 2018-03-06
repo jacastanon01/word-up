@@ -219,7 +219,16 @@ function wordSubmissionChip(wordSubmission) {
 
     // if we know the status of this word (real word or not), then add a green score or red X
     if (wordSubmission.hasOwnProperty("isRealWord")) {
-        var scoreChip = $("<span></span>").text("⟐");
+        if (wordSubmission.isRealWord) {
+            var score = wordScore(wordSubmission.word)
+            var scoreChip = $("<span></span>").text(" " + score)
+                .attr("class", "tag-sm real-score-chip")
+                
+                
+        } else {
+            var scoreChip = $("<span></span>").text(" X")
+                .attr("class", "tag-sm not-real-chip");
+        }
         // TODO 17
         // give the scoreChip appropriate text content
 
@@ -228,8 +237,8 @@ function wordSubmissionChip(wordSubmission) {
 
         // TODO 16
         // append scoreChip into wordChip
-
-    }
+        wordChip.append(scoreChip);
+    } 
 
     return wordChip;
 }
@@ -359,10 +368,13 @@ function letterScore(letter) {
 function wordScore(word) {
     // split the word into a list of letters
     var letters = word.split("");
+    
 
     // TODO 19
     // Replace the empty list below.
     // Map the list of letters into a list of scores, one for each letter.
+    //var wordScores = letters.map();
+    //console.log(wordScores);
     var letterScores = [];
 
     // return the total sum of the letter scores

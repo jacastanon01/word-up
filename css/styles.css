@@ -40,6 +40,20 @@ main {
     margin-left: 0.4em;
 }
 
+.real-score-chip {
+    background-color: mediumblue;
+    color: white;
+    padding-right: 0.3em;
+    font-weight: bold;
+}
+
+.not-real-chip {
+    color: white;
+    background-color: #d9534f;
+    padding-right: 0.3em;
+    font-weight: bold;
+}
+
 .word-submission {
     font-size: 30px;
     color: orange;
