@@ -54,6 +54,11 @@ function addNewWordSubmission(word) {
     // TODO 21
     // replace the hardcoded 'false' with the real answer
     var alreadyUsed = false;
+    for (i=0; i<model.wordSubmissions.length; i++) {
+        if (model.wordSubmissions[i].word === word) {
+            alreadyUsed = true;
+        }
+    }
 
     // if the word is valid and hasn't already been used, add it
     if (containsOnlyAllowedLetters(word) && alreadyUsed == false) {
@@ -373,12 +378,12 @@ function wordScore(word) {
     // TODO 19
     // Replace the empty list below.
     // Map the list of letters into a list of scores, one for each letter.
-    //var wordScores = letters.map();
-    //console.log(wordScores);
-    var letterScores = [];
-
+    var wordScores = letters.map(function(letter) {
+        return letterScore(letter);
+    });
+    
     // return the total sum of the letter scores
-    return letterScores.reduce(add, 0);
+    return wordScores.reduce(add, 0);
 }
 
 
@@ -399,7 +404,8 @@ function currentScore() {
 
     // TODO 20
     // return the total sum of the word scores
-    return 0;
+
+    return wordScores.reduce(add, 0);
 }
 
 
@@ -412,10 +418,23 @@ function currentScore() {
 function chooseN(n, items) {
     var selectedItems = [];
     var total = Math.min(n, items.length);
+    var vowels = ["a", "e", "i","o","u"]
+    console.log(typeof(vowels));
+    console.log(items);
+    console.log(typeof(items))
     for (var i = 0; i < total; i++) {
+        /* idx always returns -1. Fix that.  
+        var idx = selectedItems.indexOf(vowels);
+        console.log(idx)
+        */
         index = Math.floor(Math.random() * items.length);
-        selectedItems.push(items[index]);
-        items.splice(index, 1);
+        //if (idx !== -1) {
+            selectedItems.push(items[index]);
+            items.splice(index, 1);
+        //} else {
+            //selectedItems.push(vowels[index]);
+            console.log(selectedItems);
+        //}
     }
     return selectedItems;
 }
