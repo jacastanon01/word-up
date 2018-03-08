@@ -415,26 +415,35 @@ function currentScore() {
  * Randomly selects n items from a list.
  * Returns the selected items together in a (smaller) list.
  */
+
 function chooseN(n, items) {
     var selectedItems = [];
-    var total = Math.min(n, items.length);
-    var vowels = ["a", "e", "i","o","u"]
-    console.log(typeof(vowels));
-    console.log(items);
-    console.log(typeof(items))
+    var total = Math.min(n, items.length) -1;
+    var vowels = ["a", "e", "i", "o", "u"]
+    // adds vowel as first letter
+    idx = Math.floor(Math.random() * vowels.length);
+    selectedItems.push(vowels[idx]);  
+   /* 
+    var vowelFinder = vowels.filter(function(a) {
+        console.log(selectedItems.indexOf(a))
+        return selectedItems.indexOf(a) > -1;
+    });
+        
+        if (letter.indexOf(a) !== -1) {
+            console.log("hi")
+            return a;
+        }
+    };*/
+
     for (var i = 0; i < total; i++) {
-        /* idx always returns -1. Fix that.  
-        var idx = selectedItems.indexOf(vowels);
-        console.log(idx)
-        */
         index = Math.floor(Math.random() * items.length);
-        //if (idx !== -1) {
-            selectedItems.push(items[index]);
-            items.splice(index, 1);
-        //} else {
-            //selectedItems.push(vowels[index]);
-            console.log(selectedItems);
-        //}
+        if (selectedItems.includes("q") &&
+            !(selectedItems.includes("u"))) {
+            selectedItems.push("u");
+        } else {
+        selectedItems.push(items[index]);
+        items.splice(index, 1);
+        }
     }
     return selectedItems;
 }
